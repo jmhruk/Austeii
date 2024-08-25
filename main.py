@@ -3,6 +3,11 @@ import wikipedia
 import datetime
 
 class Ui_MainWindow(object):
+    def setupUi(self, MainWindow):from PyQt5 import QtCore, QtGui, QtWidgets
+import wikipedia
+import datetime
+
+class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(988, 582)
@@ -52,6 +57,96 @@ class Ui_MainWindow(object):
         self.resultBox.setBackgroundVisible(False)
         self.resultBox.setObjectName("resultBox")
 
+
+        def search():
+            print("Hello")  
+
+            info = self.lineEdit.text().lower()
+
+            if info == "":
+                self.resultBox.setEnabled(False)
+
+            else:
+
+                if info.startswith("who is "):
+                    info = info.removeprefix("who is ")
+
+                    if info.startswith("the "):
+                        try:
+                            result = wikipedia.summary(info, auto_suggest=False, sentences=1)
+                        except:
+                            result = "Sorry, I couldn't find any information on this topic.\nTry using the prefix: 'what', 'why', 'who' "
+
+                    else:
+                        try:
+                            result = wikipedia.summary(info, auto_suggest=False, sentences=1)
+                        except:
+                            result = "Sorry, I couldn't find any information on this topic.\nTry using the prefix: 'what', 'why', 'who' "
+
+
+                elif info.startswith("what is "):
+                    info = info.removeprefix("what is ")
+
+                    if info.startswith("an "):
+                        info = info.removeprefix("an ")
+                        try:
+                            result = wikipedia.summary(info, auto_suggest=False, sentences=1)
+                        except:
+                            result = "Sorry, I couldn't find any information on this topic.\nTry using the prefix: 'what', 'why', 'who' "
+
+                    elif info.startswith("a "):
+                        info = info.removeprefix("a ")
+                        try:
+                            result = wikipedia.summary(info, auto_suggest=False, sentences=1)
+                        except:
+                            result = "Sorry, I couldn't find any information on this topic.\nTry using the prefix: 'what', 'why', 'who' "
+                    
+                    elif info.startswith("the "):
+                        info = info.removeprefix("the ")
+                        try:
+                            result = wikipedia.summary(info, auto_suggest=False, sentences=1)
+                        except:
+                            result = "Sorry, I couldn't find any information on this topic.\nTry using the prefix: 'what', 'why', 'who' "
+
+                    else:
+                        try:
+                            result = wikipedia.summary(info, auto_suggest=False, sentences=1)
+                        except:
+                            result = "Sorry, I couldn't find any information on this topic.\nTry using the prefix: 'what', 'why', 'who' "
+            
+
+                #elif info.startswith("when"):
+                 #   info = info.removeprefix("when")
+                  #  print(info)
+                   # result = wikipedia.summary(info, auto_suggest=False, sentences=1)
+
+                elif info.startswith("why"):
+                    info = info.removeprefix("why")
+            
+                    try:
+                        result = wikipedia.summary(info, auto_suggest=False, sentences=1)
+                    except:
+                        result = "Sorry, I couldn't find any information on this topic.\nTry using the prefix: 'what', 'why', 'who' "
+
+
+
+                else:
+                    try:
+                        result = wikipedia.summary(info, auto_suggest=False, sentences=1)
+                    except:
+                        result = "Sorry, I couldn't find any information on this topic.\nTry using the prefix: 'what', 'why', 'who' "
+
+                #special tags
+                if info == "what is the time":
+                    result = "The time is " + datetime.now().strftime('%I:%M %p')
+
+
+
+                print(result)  
+                self.resultBox.setEnabled(True)
+                self.resultBox.setPlainText(result)
+                
+            return
         
         self.pushButton = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton.setGeometry(QtCore.QRect(410, 270, 141, 41))
